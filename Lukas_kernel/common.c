@@ -39,9 +39,9 @@ void memset(u8int *dest, u8int val, u32int len) {
 int strcmp(char *str1, char *str2){
     // Compare two strings. Should return -1 if
     // str1 < str2, 0 if they are equal or 1 otherwise.
-    int i = 0;
+    int i;
     int failed = 0;
-    for(;(str1[i] != '\0' && str2[i] != '\0'; i++) {
+    for(i = 0; str1[i] != '\0' && str2[i] != '\0'; i++) {
         if(str1[i] != str2[i]){
             failed = 1;
             break;

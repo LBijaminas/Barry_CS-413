@@ -19,9 +19,12 @@ u8int cursor_x = 0;
 u8int cursor_y = 0;
 
 // Color attribute is white on black
-static u8int attributeByte = (BLACK << 4) | (WHITE & 0x0F);
-static u16int blank = 0x20 | (attributeByte << 8); //space
-static char checkTheBits(unsigned char hByte);
+
+
+static const u8int attributeByte = (BLACK << 4) | (WHITE & 0x0F);
+// Ugly solution, but had to replace attributeByte to compile
+static const u16int blank = 0x20 | (((BLACK << 4) | (WHITE & 0x0F)) << 8); //space
+static char checkTheBits(unsigned char);
 
 static void move_cursor() {
     // Updates the hardware cursor
@@ -173,40 +176,40 @@ char checkTheBits(u8int hByte){
     */
 
     // check and print the half byte value
-    switch(bit){
-    case 0x01:
-        return '1';
-    case 0x02:
-        return '2';
-    case 0x03:
-        return '3';
-    case 0x04:
-        return '4';
-    case 0x05:
-        return '5';
-    case 0x06:
-        return '6';
-    case 0x07:
-        return '7';
-    case 0x08:
-        return '8';
-    case 0x09:
-        return '9';
-    case 0x0A:
-        return 'A';
-    case 0x0B:
-        return 'B';
-    case 0x0C:
-        return 'C';
-    case 0x0D:
-        return 'D';
-    case 0x0E:
-        return 'E';
-    case 0x0F:
-        return 'F';
-    case 0x00:
-        return '0';
-    default:
+    switch(hByte){
+        case 0x01:
+            return '1';
+        case 0x02:
+            return '2';
+        case 0x03:
+            return '3';
+        case 0x04:
+            return '4';
+        case 0x05:
+            return '5';
+        case 0x06:
+            return '6';
+        case 0x07:
+            return '7';
+        case 0x08:
+            return '8';
+        case 0x09:
+            return '9';
+        case 0x0A:
+            return 'A';
+        case 0x0B:
+            return 'B';
+        case 0x0C:
+            return 'C';
+        case 0x0D:
+            return 'D';
+        case 0x0E:
+            return 'E';
+        case 0x0F:
+            return 'F';
+        case 0x00:
+            return '0';
+        default:
         // should never happen
         return 0;
     }

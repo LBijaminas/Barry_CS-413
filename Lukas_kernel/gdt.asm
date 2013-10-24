@@ -13,8 +13,8 @@ gdt_flush:
     mov fs, ax
     mov gs, ax
     mov ss, ax
-    jmp 0x08:.flush   ; 0x08 is the offset to our code segment: Far jump!
-.flush:
+    jmp flush   ; 0x08 is the offset to our code segment: Far jump!
+flush:
     ret
 
 [GLOBAL idt_flush]    ; Allows the C code to call idt_flush().
