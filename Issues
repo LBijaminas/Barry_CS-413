@@ -1,0 +1,16 @@
+Okay call me stupid but I've spent a good 15 minutes looking for the issues
+button and I can't find it so I'm just sticking it in here. 
+
+I tried 'make' on your files and I got the same linker error as you did.
+We're definitely missing something. 
+
+======================
+
+I think you can't make issues because you are the developer of the distro.
+I can't do it either. Either way, yeah we have to work this out. Either there is some flag
+that has to be set, or we're both missing some 32-bit library.
+
+
+======================
+
+My bad, just created issue tracker, now we can post there.

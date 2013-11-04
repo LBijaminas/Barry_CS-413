@@ -17,7 +17,7 @@ run: all
 
 
 os-image: boot_sector.bin kernel.bin
-	cat $^ > os-image
+	cat boot_sector.bin kernel.bin > os-image
 
 kernel.bin: Lukas_kernel/kernel_entry.o Lukas_kernel/gdt.o Lukas_kernel/interrupt.o ${OBJ}
 	ld -o $@ -Tlink.ld $^ --oformat binary -melf_i386
