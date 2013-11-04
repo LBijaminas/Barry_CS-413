@@ -2,7 +2,8 @@
 
 #ifndef COMMON_H
 #define COMMON_H
-
+// let's define what NULL is
+#define NULL 0
 // Type defs so I wouldn't need to rewrite multi-word
 // variable types
 typedef unsigned int   u32int;
@@ -23,7 +24,4 @@ int strcmp(char *, char *);
 char *strcpy(char *, const char *);
 char *strcat(char *, const char *);
 
-// stack protector
-void * __stack_chk_guard = NULL;
-void * __stack_chk_fail = NULL;
 #endif
