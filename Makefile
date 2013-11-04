@@ -23,7 +23,7 @@ kernel.bin: Lukas_kernel/kernel_entry.o Lukas_kernel/gdt.o Lukas_kernel/interrup
 	ld -o $@ -Tlink.ld $^ --oformat binary -melf_i386
 
 %.o: Lukas_kernel/%.c ${HEADERS}
-	gcc -m32 -nostdinc -nodefaultlibs -nostdlib -fno-builtin -ffreestanding -c $< -o $@
+	gcc -m32 -fno-stack-protector -nostdinc -nodefaultlibs -nostdlib -fno-builtin -ffreestanding -c $< -o $@
 
 # Assemble the kernel_entry .
 Lukas_kernel/%.o: Lukas_kernel/%.asm

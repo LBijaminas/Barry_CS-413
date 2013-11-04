@@ -17,5 +17,13 @@ typedef          char  s8int;
 void outb(u16int, u8int);
 u8int inb(u16int);
 u16int inw(u16int);
+void memcpy(u8int *, const u8int *, u32int);
+void memset(u8int *, u8int, u32int);
+int strcmp(char *, char *);
+char *strcpy(char *, const char *);
+char *strcat(char *, const char *);
 
+// stack protector
+void * __stack_chk_guard = NULL;
+void * __stack_chk_fail = NULL;
 #endif
