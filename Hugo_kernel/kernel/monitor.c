@@ -31,10 +31,10 @@ static void move_cursor() {
 
     // The screen is 80 characters wide
     u16int cursorLocation = cursor_y * SCREEN_WIDTH + cursor_x;
-    byte_out(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
-    byte_out(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
-    byte_out(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
-    byte_out(0x3D5, cursorLocation);      // Send the low cursor byte.
+    outb(0x3D4, 14);                  // Tell the VGA board we are setting the high cursor byte.
+    outb(0x3D5, cursorLocation >> 8); // Send the high cursor byte.
+    outb(0x3D4, 15);                  // Tell the VGA board we are setting the low cursor byte.
+    outb(0x3D5, cursorLocation);      // Send the low cursor byte.
 }
 
 static void scroll() {
@@ -60,7 +60,7 @@ static void scroll() {
     }
 }
 
-void monitor_putc(char c) {
+void monitor_put(char c) {
     // Writes a single character out to the screen
 
     u8int bgColor = BLACK;
@@ -128,10 +128,10 @@ void monitor_clear() {
 }
 
 // Outputs a null-terminated ASCII string to the monitor.
-void monitor_puts(char *c) {
+void monitor_write(char *c) {
     int i = 0;
     while (c[i]){
-        monitor_putc(c[i++]);
+        monitor_put(c[i++]);
     }
 }
 

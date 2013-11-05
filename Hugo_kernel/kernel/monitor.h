@@ -1,13 +1,17 @@
-/*
- * monitor.h -- defines routines for interacting with the monitor
- */
+// From JamesM's tutorial
 
-#ifndef _MONITOR_H_
-#define _MONITOR_H_
+#ifndef MONITOR_H
+#define MONITOR_H
 
 #include "common.h"
 
-void monitor_putc(char c);
+// Write a single character out to the screen
+void monitor_put(char c);
+
+// Clear the screen
 void monitor_clear();
-void monitor_puts(char *c);
-#endif /*_MONITOR_H_*/
+
+// Output a null-terminated ASCII string to the monitor
+void monitor_write(char *c);
+
+#endif

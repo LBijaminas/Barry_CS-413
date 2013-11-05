@@ -1,4 +1,4 @@
-OBJ=kernel_entry.o kernel_main.o common.o monitor.o
+OBJ=kernel_entry.o kernel_main.o monitor.o common.o
 CFLAGS=-m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector
 
 kernel: $(OBJ)

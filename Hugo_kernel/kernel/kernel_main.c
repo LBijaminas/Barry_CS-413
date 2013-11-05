@@ -1,7 +1,8 @@
 #include "monitor.h"
 
-void kernel_main()
+int kernel_main()
 {
 	monitor_clear();
-	monitor_puts("Hello, World!");	
+	monitor_write("Hello, World!");
+	return 0xDEADBABA;	
 }
