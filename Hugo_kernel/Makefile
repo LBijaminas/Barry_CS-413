@@ -1,12 +1,18 @@
-image: boot kernel
-	cat boot_sect.bin kernel.bin > os-image
+BOOT_LOADER_DIR=boot_loader
+KERNEL_DIR=kernel
 
-kernel: kernel.c
-	gcc -ffreestanding -c $^ -o kernel.o
-	ld -o kernel.bin -Ttext 0x1000 kernel.o --oformat binary
+image: .PHONY
+	cat $(BOOT_LOADER_DIR)/boot_sect.bin $(KERNEL_DIR)/kernel.bin > os-image
 
-boot: boot_sector.asm
-	nasm $^ -f bin -o boot_sect.bin
+.PHONY: kernel
+
+kernel: 
+	$(MAKE) -C $(KERNEL_DIR)
+
+.PHONY: boot
+
+boot: 
+	$(MAKE) -C $(BOOT_LOADER_DIR)	
 
 clean:
-	rm kernel.o kernel.bin os-image
+	rm boot_loader/*.o boot_loader/*.bin  kernel/*.o kernel/*.bin os-image 
