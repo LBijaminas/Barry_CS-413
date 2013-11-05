@@ -9,10 +9,5 @@ image: .PHONY
 kernel: 
 	$(MAKE) -C $(KERNEL_DIR)
 
-.PHONY: boot
-
-boot: 
-	$(MAKE) -C $(BOOT_LOADER_DIR)	
-
 clean:
 	rm boot_loader/*.o boot_loader/*.bin  kernel/*.o kernel/*.bin os-image 
