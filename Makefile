@@ -20,7 +20,7 @@ os-image: boot_sector.bin kernel.bin
 	cat boot_sector.bin kernel.bin > os-image
 
 kernel.bin: Lukas_kernel/kernel_entry.o Lukas_kernel/gdt.o Lukas_kernel/interrupt.o ${OBJ}
-	ld -o $@ -Tlink.ld $^ --oformat binary -melf_i386
+	ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
 
 %.o: Lukas_kernel/%.c ${HEADERS}
 	gcc -m32 -fstack-protector-all -nostdinc -nodefaultlibs -nostdlib -fno-builtin -ffreestanding -c $< -o $@
