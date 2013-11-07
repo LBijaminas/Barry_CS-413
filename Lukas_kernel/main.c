@@ -16,13 +16,15 @@ int main(){
 
     monitor_write("Working!\n");
     monitor_write_hex(0x123456);
-    monitor_write_dec(987654321);
+    monitor_write_dec(0);
+    monitor_write_dec(10);
+    monitor_write_dec(11);
     // Throw some interrupts to ensure interrupt handler is working
-   /* asm volatile("int $0x3");
+    asm volatile("int $0x3");
     asm volatile("int $0x4");
 
     asm volatile("sti");
-    init_timer(50);*/
+    //init_timer(50);
 
     return 0;
 }

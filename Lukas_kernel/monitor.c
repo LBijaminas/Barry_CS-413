@@ -166,9 +166,9 @@ static char *dec_to_string(u32int n){
     while (temp_num/10 > 0){ // the condition because there is no way to get the size of the number
         // let's extract the decimal value of the position
         modulo = temp_num % 10;
-
         // get the string value of the decimal
         temp_char = checkTheBits(modulo);
+
         // append the reverse string and increment the counter
         number_string_reverse[counter++] = temp_char;
 
@@ -178,12 +178,14 @@ static char *dec_to_string(u32int n){
     // after the loop there should be one more value needed to be added
     temp_char = checkTheBits(temp_num);
     number_string_reverse[counter] = temp_char;
+
     size = counter; // that's how many elements we have in our string
 
     // now let's rearrange to the normal order
     for (; counter > -1; counter--){
         number_string[size - counter] = number_string_reverse[counter];
     }
+    number_string[size + 1] = '\0'; // make sure that it ends with null byte to avoid bugs
     return number_string;
 }
 static char *hex_to_string(u32int n){
