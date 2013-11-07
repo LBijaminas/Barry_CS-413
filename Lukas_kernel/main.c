@@ -1,13 +1,11 @@
 // From JamesM's tutorial
 
 #include "monitor.h"
-//#include "descriptor_tables.h"
-//#include "timer.h"
+#include "descriptor_tables.h"
+#include "timer.h"
 
 int main(){
-    monitor_clear();
-    monitor_write("Working!\n");
-   /* // setup stack protector
+    // setup stack protector
      __stack_chk_guard_setup();
 
     // Initialise all the ISRs and segmentation
@@ -25,6 +23,5 @@ int main(){
     asm volatile("sti");
     init_timer(50);
 
-    return 0;*/
-    return 0xFEFE;
+    return 0;
 }

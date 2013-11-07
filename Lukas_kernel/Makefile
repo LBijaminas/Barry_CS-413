@@ -3,7 +3,7 @@
 # $< - first required file
 
 C_SOURCES=$(wildcard *.c ../drivers/*.c)
-HEADERS=$(wildcard L*.h ../*.h)
+HEADERS=$(wildcard *.h ../*.h)
 
 # Convert the *. c filenames to *. o to give a list of object files to build
 OBJ=${C_SOURCES:.c=.o}
@@ -13,17 +13,16 @@ all: os-image
 
 # Run bochs to simulate booting of our code .
 run: all
-	bochs
 
 os-image: boot_sector.bin kernel.bin
 	cat boot_sector.bin kernel.bin > os-image
 
 #kernel.bin: kernel_entry.o gdt.o interrupt.o ${OBJ}
-#	ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
+	#ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
 
 #%.o: %.c ${HEADERS}
-#	gcc -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -ffreestanding -c $< -o $@
-kernel.bin: kernel_entry.o common.o monitor.o main.o
+	#gcc -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -ffreestanding -c $< -o $@
+kernel.bin: kernel_entry.o isr.o descriptor_tables.o gdt.o interrupt.o timer.o common.o monitor.o main.o
 	ld -melf_i386 -o $@ -Tlink.ld -Ttext 0x1000 $^ --oformat binary
 
 %.o: %.c ${HEADERS}
