@@ -5,7 +5,9 @@
 #include "timer.h"
 
 int main(){
-    // setup stack protector
+    char *video_mem = 0xb8000;
+    video_mem[0] = 'x';
+   /* // setup stack protector
      __stack_chk_guard_setup();
 
     // Initialise all the ISRs and segmentation
@@ -23,5 +25,6 @@ int main(){
     asm volatile("sti");
     init_timer(50);
 
-    return 0;
+    return 0;*/
+    return 0xFEFE;
 }
