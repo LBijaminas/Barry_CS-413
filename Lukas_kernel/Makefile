@@ -18,12 +18,16 @@ run: all
 os-image: boot_sector.bin kernel.bin
 	cat boot_sector.bin kernel.bin > os-image
 
-kernel.bin: kernel_entry.o gdt.o interrupt.o ${OBJ}
-	ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
+#kernel.bin: kernel_entry.o gdt.o interrupt.o ${OBJ}
+#	ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
+
+#%.o: %.c ${HEADERS}
+#	gcc -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -ffreestanding -c $< -o $@
+kernel.bin: kernel_entry.o common.o monitor.o main.o
+	ld -melf_i386 -o $@ -Tlink.ld -Ttext 0x1000 $^ --oformat binary
 
 %.o: %.c ${HEADERS}
 	gcc -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -ffreestanding -c $< -o $@
-
 # Assemble the kernel_entry .
 %.o: %.asm
 	nasm $< -f elf32 -o $@

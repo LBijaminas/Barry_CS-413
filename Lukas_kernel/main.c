@@ -1,12 +1,12 @@
 // From JamesM's tutorial
 
 #include "monitor.h"
-#include "descriptor_tables.h"
-#include "timer.h"
+//#include "descriptor_tables.h"
+//#include "timer.h"
 
 int main(){
-    char *video_mem = 0xb8000;
-    video_mem[0] = 'x';
+    monitor_clear();
+    monitor_write("Working!\n");
    /* // setup stack protector
      __stack_chk_guard_setup();
 

@@ -12,7 +12,7 @@
 #define WHITE 15
 
 // memory buffer starts at 0xB8000
-u16int *video_memory = (u16int *)0xB8000;
+u16int *video_memory = (u16int *)0xb8000;
 
 // Default cursor position
 u8int cursor_x = 0;
@@ -20,10 +20,6 @@ u8int cursor_y = 0;
 
 // Color attribute is white on black
 
-
-static const u8int attributeByte = (BLACK << 4) | (WHITE & 0x0F);
-// Ugly solution, but had to replace attributeByte to compile
-static const u16int blank = 0x20 | (((BLACK << 4) | (WHITE & 0x0F)) << 8); //space
 static char checkTheBits(unsigned char);
 
 static void move_cursor() {
@@ -39,6 +35,11 @@ static void move_cursor() {
 
 static void scroll() {
     // Scrolls the text on the screen up by one line
+    u8int bgColor = BLACK;
+    u8int frColor = WHITE;
+
+    u8int  attributeByte = (bgColor << 4) | (frColor & 0x0F);
+    u16int blank = 0x20 | ((attributeByte) << 8); //space
 
     // Row 25 is the end, this means we need to scroll up
     if(cursor_y >= MAX_HEIGHT) {
@@ -67,6 +68,7 @@ void monitor_put(char c) {
     u8int frColor = WHITE;
 
     u8int  attributeByte = (bgColor << 4) | (frColor & 0x0F);
+    u16int blank = 0x20 | ((attributeByte) << 8); //space
 
     u16int *location;
 
@@ -116,6 +118,11 @@ void monitor_put(char c) {
 void monitor_clear() {
     // Clears the screen by putting spaces in it
 
+    u8int bgColor = BLACK;
+    u8int frColor = WHITE;
+    u8int  attributeByte = (bgColor << 4) | (frColor & 0x0F);
+    u16int blank = 0x20 | ((attributeByte) << 8); //space
+    video_memory[0] = 'L';
     int i;
     for (i = 0; i < SCREEN_WIDTH*MAX_HEIGHT; i++) {
         video_memory[i] = blank;
