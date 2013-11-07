@@ -16,4 +16,7 @@ void monitor_write(char *c);
 
 // write hex function
 void monitor_write_hex(u32int);
+
+// write decimal function
+void monitor_write_dec(s32int number);
 #endif

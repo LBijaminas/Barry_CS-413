@@ -18,10 +18,10 @@ u16int *video_memory = (u16int *)0xb8000;
 u8int cursor_x = 0;
 u8int cursor_y = 0;
 
-// Color attribute is white on black
-
-static char checkTheBits(unsigned char);
+static char checkTheBits(u8int);
 static char *hex_to_string(u32int);
+static char *dec_to_string(u32int);
+
 static void move_cursor() {
     // Updates the hardware cursor
 
@@ -145,9 +145,47 @@ void monitor_write_hex(u32int value){
     char *converted = hex_to_string(value);
     monitor_write("0x");
     monitor_write(converted);
-    monitor_write('\n');
+    monitor_put('\n');
+}
+void monitor_write_dec(s32int number){
+    char *converted = dec_to_string(number);
+    monitor_write(converted);
+    monitor_put('\n');
 }
 
+static char *dec_to_string(u32int n){
+    // Let's build number from the bottom backwards
+
+    // temporary values
+    s32int temp_num = n;
+    char temp_char;
+    int counter = 0, size; // counter is needed to count how many elements are in the number
+
+    int modulo; // this will hold the modulo
+    char *number_string_reverse, *number_string; // will hold the number string
+    while (temp_num/10 > 0){ // the condition because there is no way to get the size of the number
+        // let's extract the decimal value of the position
+        modulo = temp_num % 10;
+
+        // get the string value of the decimal
+        temp_char = checkTheBits(modulo);
+        // append the reverse string and increment the counter
+        number_string_reverse[counter++] = temp_char;
+
+        //update the temp number to avoid infinite loop
+        temp_num /= 10;
+    }
+    // after the loop there should be one more value needed to be added
+    temp_char = checkTheBits(temp_num);
+    number_string_reverse[counter] = temp_char;
+    size = counter; // that's how many elements we have in our string
+
+    // now let's rearrange to the normal order
+    for (; counter > -1; counter--){
+        number_string[size - counter] = number_string_reverse[counter];
+    }
+    return number_string;
+}
 static char *hex_to_string(u32int n){
     // output hexadecimal chars
     unsigned char* location = &n; //get the location of the hex number
@@ -222,8 +260,8 @@ char checkTheBits(u8int hByte){
         case 0x00:
             return '0';
         default:
-        // should never happen
-        return 0;
+            // should never happen
+            return 0;
     }
 }
 
