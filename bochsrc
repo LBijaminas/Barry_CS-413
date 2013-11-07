@@ -5,6 +5,9 @@ floppya: 1_44=Lukas_kernel/os-image, status=inserted
 boot: a
 log: bochsout.txt
 mouse: enabled=0
+<<<<<<< HEAD
 clock: sync=realtime
 cpu: ips=500000 
 display_library: sdl
+=======
+>>>>>>> a5168305fe08381f85a05351095c0272fd0c4bb3
