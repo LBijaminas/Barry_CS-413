@@ -21,7 +21,7 @@ u8int cursor_y = 0;
 // Color attribute is white on black
 
 static char checkTheBits(unsigned char);
-
+static char *hex_to_string(u32int);
 static void move_cursor() {
     // Updates the hardware cursor
 
@@ -141,9 +141,14 @@ void monitor_write(char *c) {
         monitor_put(c[i++]);
     }
 }
+void monitor_write_hex(u32int value){
+    char *converted = hex_to_string(value);
+    monitor_write("0x");
+    monitor_write(converted);
+    monitor_write('\n');
+}
 
-
-char* hex_to_string(unsigned int n){
+static char *hex_to_string(u32int n){
     // output hexadecimal chars
     unsigned char* location = &n; //get the location of the hex number
     char value[9] = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}; // init null byte array
@@ -173,7 +178,7 @@ char* hex_to_string(unsigned int n){
             }
         } else { break;}
     }
-    return value;
+    return (char *)value;
 }
 
 char checkTheBits(u8int hByte){

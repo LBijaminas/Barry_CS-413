@@ -30,7 +30,7 @@
 00000000000i[     ]   SB16 support: no
 00000000000i[     ]   USB support: no
 00000000000i[     ]   VGA extension support: vbe
-00000000000i[MEM0 ] allocated memory at 0x7fd3a1ddd010. after alignment, vector=0x7fd3a1dde000
+00000000000i[MEM0 ] allocated memory at 0x7fb2ec540010. after alignment, vector=0x7fb2ec541000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[     ] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Thu Nov  7 12:33:10 2013 (time0=1383845590)
+00000000000i[CMOS ] Setting initial clock to: Thu Nov  7 15:23:19 2013 (time0=1383855799)
 00000000000i[     ] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[     ] init_dev of 'pic' plugin device by virtual method
@@ -178,30 +178,30 @@
 00001814049i[BIOS ] ACPI tables: RSDP addr=0x000fbb30 ACPI DATA addr=0x01ff0000 size=0x1f18
 00001814085i[PCI  ] i440FX PMC write to PAM register 59 (TLB Flush)
 00001814809i[BIOS ] bios_table_cur_addr: 0x000fbb54
-04554074430i[BIOS ] Booting from 0000:7c00
-04555445813i[FDD  ] read() on floppy image returns 0
-04555501368i[FDD  ] read() on floppy image returns 0
-04555556923i[FDD  ] read() on floppy image returns 0
-04555612478i[FDD  ] read() on floppy image returns 0
-04555668033i[FDD  ] read() on floppy image returns 0
-04555723588i[FDD  ] read() on floppy image returns 0
-04778835000i[CTRL ] Bochs thread has been asked to quit.
-04778835000i[CPU0 ] CPU is in protected mode (active)
-04778835000i[CPU0 ] CS.mode = 32 bit
-04778835000i[CPU0 ] SS.mode = 32 bit
-04778835000i[CPU0 ] EFER   = 0x00000000
-04778835000i[CPU0 ] | EAX=00000000  EBX=00007cff  ECX=000b8000  EDX=00000040
-04778835000i[CPU0 ] | ESP=0008fff8  EBP=00090000  ESI=000e46dc  EDI=0000ffac
-04778835000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df IF tf sf zf af PF cf
-04778835000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
-04778835000i[CPU0 ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
-04778835000i[CPU0 ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04778835000i[CPU0 ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04778835000i[CPU0 ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04778835000i[CPU0 ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04778835000i[CPU0 ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
-04778835000i[CPU0 ] | EIP=00001006 (00001006)
-04778835000i[CPU0 ] | CR0=0x60000011 CR2=0x00000000
-04778835000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
-04778835000i[CMOS ] Last time is 1383846545 (Thu Nov  7 12:49:05 2013)
-04778835000i[CTRL ] quit_sim called with exit code 0
+04453095500i[BIOS ] Booting from 0000:7c00
+04454466883i[FDD  ] read() on floppy image returns 0
+04454522438i[FDD  ] read() on floppy image returns 0
+04454577993i[FDD  ] read() on floppy image returns 0
+04454633548i[FDD  ] read() on floppy image returns 0
+04454689103i[FDD  ] read() on floppy image returns 0
+04454744658i[FDD  ] read() on floppy image returns 0
+04840010000i[CTRL ] Bochs thread has been asked to quit.
+04840010000i[CPU0 ] CPU is in protected mode (active)
+04840010000i[CPU0 ] CS.mode = 32 bit
+04840010000i[CPU0 ] SS.mode = 32 bit
+04840010000i[CPU0 ] EFER   = 0x00000000
+04840010000i[CPU0 ] | EAX=00000000  EBX=00007cff  ECX=000b8000  EDX=00000000
+04840010000i[CPU0 ] | ESP=0008fff8  EBP=00090000  ESI=000e46dc  EDI=0000ffac
+04840010000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf ZF af PF cf
+04840010000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+04840010000i[CPU0 ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+04840010000i[CPU0 ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+04840010000i[CPU0 ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+04840010000i[CPU0 ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+04840010000i[CPU0 ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+04840010000i[CPU0 ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+04840010000i[CPU0 ] | EIP=00001006 (00001006)
+04840010000i[CPU0 ] | CR0=0x60000011 CR2=0x00000000
+04840010000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+04840010000i[CMOS ] Last time is 1383856767 (Thu Nov  7 15:39:27 2013)
+04840010000i[CTRL ] quit_sim called with exit code 0
