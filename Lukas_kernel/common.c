@@ -98,4 +98,3 @@ void __attribute__((noreturn)) __stack_chk_fail(){
     for(;;)
     vid[0]++;
 }
-

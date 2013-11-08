@@ -30,7 +30,7 @@
 00000000000i[     ]   SB16 support: no
 00000000000i[     ]   USB support: no
 00000000000i[     ]   VGA extension support: vbe
-00000000000i[MEM0 ] allocated memory at 0x7f0429ddd010. after alignment, vector=0x7f0429dde000
+00000000000i[MEM0 ] allocated memory at 0x7f8b35ddd010. after alignment, vector=0x7f8b35dde000
 00000000000i[MEM0 ] 32.00MB
 00000000000i[MEM0 ] mem block size = 0x00100000, blocks=32
 00000000000i[MEM0 ] rom at 0xfffe0000/131072 ('/usr/share/bochs/BIOS-bochs-latest')
@@ -41,7 +41,7 @@
 00000000000i[DEV  ] PIIX3 PCI-to-ISA bridge present at device 1, function 0
 00000000000i[     ] init_dev of 'cmos' plugin device by virtual method
 00000000000i[CMOS ] Using local time for initial clock
-00000000000i[CMOS ] Setting initial clock to: Thu Nov  7 18:01:09 2013 (time0=1383865269)
+00000000000i[CMOS ] Setting initial clock to: Thu Nov  7 19:27:28 2013 (time0=1383870448)
 00000000000i[     ] init_dev of 'dma' plugin device by virtual method
 00000000000i[DMA  ] channel 4 used by cascade
 00000000000i[     ] init_dev of 'pic' plugin device by virtual method
@@ -178,11 +178,31 @@
 00001814058i[BIOS ] ACPI tables: RSDP addr=0x000fbb30 ACPI DATA addr=0x01ff0000 size=0x1f18
 00001814094i[PCI  ] i440FX PMC write to PAM register 59 (TLB Flush)
 00001814818i[BIOS ] bios_table_cur_addr: 0x000fbb54
-03016325169i[BIOS ] Booting from 0000:7c00
-03017696552i[FDD  ] read() on floppy image returns 0
-03017752107i[FDD  ] read() on floppy image returns 0
-03017807662i[FDD  ] read() on floppy image returns 0
-03017863217i[FDD  ] read() on floppy image returns 0
-03017918772i[FDD  ] read() on floppy image returns 0
-03017974327i[FDD  ] read() on floppy image returns 0
-03018079042i[MEM0 ] allocate_block: block=0x3 used 0x3 of 0x20
+02650646379i[BIOS ] Booting from 0000:7c00
+02652017762i[FDD  ] read() on floppy image returns 0
+02652073317i[FDD  ] read() on floppy image returns 0
+02652128872i[FDD  ] read() on floppy image returns 0
+02652184427i[FDD  ] read() on floppy image returns 0
+02652239982i[FDD  ] read() on floppy image returns 0
+02652295537i[FDD  ] read() on floppy image returns 0
+02652400278i[MEM0 ] allocate_block: block=0x3 used 0x3 of 0x20
+02827400000i[CTRL ] Bochs thread has been asked to quit.
+02827400000i[CPU0 ] CPU is in protected mode (active)
+02827400000i[CPU0 ] CS.mode = 32 bit
+02827400000i[CPU0 ] SS.mode = 32 bit
+02827400000i[CPU0 ] EFER   = 0x00000000
+02827400000i[CPU0 ] | EAX=00000000  EBX=00007cff  ECX=0008fee9  EDX=0008fef0
+02827400000i[CPU0 ] | ESP=0008fed0  EBP=0008ff08  ESI=000e46dc  EDI=0000ffac
+02827400000i[CPU0 ] | IOPL=0 id vip vif ac vm rf nt of df if tf sf zf AF PF cf
+02827400000i[CPU0 ] | SEG sltr(index|ti|rpl)     base    limit G D
+02827400000i[CPU0 ] |  CS:0008( 0001| 0|  0) 00000000 ffffffff 1 1
+02827400000i[CPU0 ] |  DS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02827400000i[CPU0 ] |  SS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02827400000i[CPU0 ] |  ES:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02827400000i[CPU0 ] |  FS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02827400000i[CPU0 ] |  GS:0010( 0002| 0|  0) 00000000 ffffffff 1 1
+02827400000i[CPU0 ] | EIP=000025fb (000025fb)
+02827400000i[CPU0 ] | CR0=0x60000011 CR2=0x00000000
+02827400000i[CPU0 ] | CR3=0x00000000 CR4=0x00000000
+02827400000i[CMOS ] Last time is 1383871013 (Thu Nov  7 19:36:53 2013)
+02827400000i[CTRL ] quit_sim called with exit code 0

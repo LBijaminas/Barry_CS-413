@@ -23,5 +23,4 @@ void memset(u8int *, u8int, u32int);
 int strcmp(char *, char *);
 char *strcpy(char *, const char *);
 char *strcat(char *, const char *);
-
 #endif
