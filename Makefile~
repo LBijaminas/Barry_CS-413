@@ -2,8 +2,8 @@
 # $@ - output files
 # $< - first required file
 
-C_SOURCES=$(wildcard *.c ../drivers/*.c)
-HEADERS=$(wildcard *.h ../*.h)
+C_SOURCES=$(wildcard Lukas_kernel/*.c drivers/*.c)
+HEADERS=$(wildcard Lukas_kernel/*.h drivers/*.h)
 
 # Convert the *. c filenames to *. o to give a list of object files to build
 OBJ=${C_SOURCES:.c=.o}
@@ -13,25 +13,23 @@ all: os-image
 
 # Run bochs to simulate booting of our code .
 run: all
+	bochs
+
 
 os-image: boot_sector.bin kernel.bin
 	cat boot_sector.bin kernel.bin > os-image
 
-#kernel.bin: kernel_entry.o gdt.o interrupt.o ${OBJ}
-	#ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
+kernel.bin: Lukas_kernel/kernel_entry.o ${OBJ}
+	ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
 
-#%.o: %.c ${HEADERS}
-	#gcc -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -ffreestanding -c $< -o $@
-kernel.bin: kernel_entry.o isr.o descriptor_tables.o gdt.o interrupt.o timer.o common.o monitor.o main.o
-	ld -melf_i386 -o $@ -Tlink.ld -Ttext 0x1000 $^ --oformat binary
-
-%.o: %.c ${HEADERS}
+%.o: Lukas_kernel/%.c ${HEADERS}
 	gcc -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector -ffreestanding -c $< -o $@
+
 # Assemble the kernel_entry .
-%.o: %.asm
+Lukas_kernel/%.o: Lukas_kernel/%.asm
 	nasm $< -f elf32 -o $@
-%.bin: ../asm/%.asm
-	nasm $< -f bin -I '../asm/' -o $@
+%.bin: asm/%.asm
+	nasm $< -f bin -I 'asm/' -o $@
 clean:
 	rm -fr *.bin *.dis *.o os-image
 	rm -fr Lukas_kernel/*.o Lukas_kernel/boot/*.bin drivers/*.o
