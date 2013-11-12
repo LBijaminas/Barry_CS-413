@@ -14,8 +14,8 @@ all: os-image
 # Run bochs to simulate booting of our code .
 run: all
 
-os-image: boot_sector.bin kernel.bin
-	cat boot_sector.bin kernel.bin > os-image
+os-image: asm/boot_sector.bin kernel.bin
+	cat $^ > os-image
 
 #kernel.bin: kernel_entry.o gdt.o interrupt.o ${OBJ}
 	#ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
