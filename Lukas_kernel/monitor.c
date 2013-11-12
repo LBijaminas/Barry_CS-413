@@ -163,11 +163,11 @@ static char *dec_to_string(u32int n){
 
     int modulo; // this will hold the modulo
     char *number_string_reverse, *number_string; // will hold the number string
-    while (temp_num/10 > 0){ // the condition because there is no way to get the size of the number
+    while (temp_num > 0){
         // let's extract the decimal value of the position
         modulo = temp_num % 10;
         // get the string value of the decimal
-        temp_char = checkTheBits(modulo);
+		temp_char = checkTheBits(modulo);
 
         // append the reverse string and increment the counter
         number_string_reverse[counter++] = temp_char;
