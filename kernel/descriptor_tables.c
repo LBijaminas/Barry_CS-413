@@ -79,6 +79,7 @@ static void init_idt() {
     outb(0x21, 0x0);
     outb(0xA1, 0x0);
 
+	//processor defined interrupts
     idt_set_gate( 0, (u32int)isr0 , 0x08, 0x8E);
     idt_set_gate( 1, (u32int)isr1 , 0x08, 0x8E);
     idt_set_gate( 2, (u32int)isr2 , 0x08, 0x8E);
@@ -111,7 +112,9 @@ static void init_idt() {
     idt_set_gate(29, (u32int)isr29, 0x08, 0x8E);
     idt_set_gate(30, (u32int)isr30, 0x08, 0x8E);
     idt_set_gate(31, (u32int)isr31, 0x08, 0x8E);
-    idt_set_gate(32, (u32int)irq0, 0x08, 0x8E);
+    
+	//non-processor interrupt requests
+	idt_set_gate(32, (u32int)irq0, 0x08, 0x8E);
     idt_set_gate(33, (u32int)irq1, 0x08, 0x8E);
     idt_set_gate(34, (u32int)irq2, 0x08, 0x8E);
     idt_set_gate(35, (u32int)irq3, 0x08, 0x8E);

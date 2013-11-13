@@ -159,7 +159,8 @@ static char *dec_to_string(u32int n){
     // temporary values
     s32int temp_num = n;
     char temp_char;
-    int counter = 0, size; // counter is needed to count how many elements are in the number
+    int size = 0, upperBound; // size is needed to count how many elements are in the number
+	int i;
 
     int modulo; // this will hold the modulo
     char *number_string_reverse, *number_string; // will hold the number string
@@ -169,23 +170,20 @@ static char *dec_to_string(u32int n){
         // get the string value of the decimal
 		temp_char = checkTheBits(modulo);
 
-        // append the reverse string and increment the counter
-        number_string_reverse[counter++] = temp_char;
+        // append the reverse string and increment the size
+        number_string_reverse[size++] = temp_char;
 
         //update the temp number to avoid infinite loop
         temp_num /= 10;
     }
-    // after the loop there should be one more value needed to be added
-    temp_char = checkTheBits(temp_num);
-    number_string_reverse[counter] = temp_char;
 
-    size = counter; // that's how many elements we have in our string
+    upperBound = size - 1;
 
     // now let's rearrange to the normal order
-    for (; counter > -1; counter--){
-        number_string[size - counter] = number_string_reverse[counter];
+    for (i = 0; i < size; i++){
+        number_string[i] = number_string_reverse[upperBound - i];
     }
-    number_string[size + 1] = '\0'; // make sure that it ends with null byte to avoid bugs
+    number_string[size] = '\0'; // make sure that it ends with null byte to avoid bugs
     return number_string;
 }
 static char *hex_to_string(u32int n){
