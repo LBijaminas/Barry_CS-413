@@ -13,7 +13,7 @@ u32int kmalloc_internal(u32int size, int align, u32int *address){
         Address acts as a flag, as well as provides a variable, if provided,
         to return the new page address
     */
-    if (align == 1 && (p_address & 0xFFFFF000)){
+    if (align && (p_address & 0xFFF)){
         // align is needed
 
         // ensures that it is on the page bound
