@@ -9,6 +9,53 @@
 #include "descriptor_tables.h"
 #include "isr.h"
 
+/*
+ * Defines for programming the PIC
+ */
+#define PIC_MASTER_CMD 0x20
+#define PIC_MASTER_DATA 0x21
+#define PIC_SLAVE_CMD 0xA0
+#define PIC_SLAVE_DATA 0xA1
+
+/*
+ * Initialization Control Word 1 -- Initialization
+ * Bit 0: Set if PIC should expect to receive IC4
+ * Bit 1: Set if only one PIC in system (non-cascaded)
+ * Bit 2: Ignored by x86
+ * Bit 3: Edge triggered/level triggered interrupts (rising edge in VHDL)
+ * Bit 4: Set if PIC is to be initialized (obviously we will set this one)
+ * Bit 5-7: x86 must be 0
+ */
+#define ICW1_IC4_INIT 0x11 //00010001
+
+/*
+ * Initialization Control Word 2 -- Which interrupts in IDT to use
+ * Set this to 0x20 on master and 0x28 on slave
+ */
+#define ICW2_MASTER_IDTOFFSET 0x20
+#define ICW2_SLAVE_IDTOFFSET 0x28
+
+/*
+ * Initialization Control Word 3 -- What IRQ lines are used for inter-PIC comms
+ * Primary PIC- each bit represents an interrupt request
+ * x86 uses IRQ 2 for inter-PIC comms so we use bit two (00000100)
+ * Secondary PIC- uses a binary number instead of setting a wire high or low
+ */
+#define ICW3_MASTER_CASCADE 0x04
+#define ICW3_SLAVE_CASCADE 0x02
+
+/*
+ * Initialization Control Word 4 -- Controls operation
+ * Bit 0: If set, architecture is x86
+ * Bit 1: If set, on last int ack pulse controller automatically does EOI
+ * Bit 2: Only use if operating in buffered mode. 1 for master 0 for slave
+ * Bit 3: If set, controller operates in buffered mode
+ * Bit 4: Special Fully Nested Mode (a lot of cascaded PICs no x86 support)
+ * Bit 5-7: Always 0
+ */
+#define ICW4_INIT_X86 0x01
+
+
 // Access for the ASM functions.
 extern void gdt_flush(u32int);
 extern void idt_flush(u32int);
@@ -68,16 +115,16 @@ static void init_idt() {
     memset(&idt_entries, 0, sizeof(idt_entry_t)*256);
 
     // Remap the irq table.
-    outb(0x20, 0x11);
-    outb(0xA0, 0x11);
-    outb(0x21, 0x20);
-    outb(0xA1, 0x28);
-    outb(0x21, 0x04);
-    outb(0xA1, 0x02);
-    outb(0x21, 0x01);
-    outb(0xA1, 0x01);
-    outb(0x21, 0x0);
-    outb(0xA1, 0x0);
+    outb(PIC_MASTER_CMD, ICW1_IC4_INIT);
+    outb(PIC_SLAVE_CMD, ICW1_IC4_INIT);
+    outb(PIC_MASTER_DATA, ICW2_MASTER_IDTOFFSET);
+    outb(PIC_SLAVE_DATA, ICW2_SLAVE_IDTOFFSET);
+    outb(PIC_MASTER_DATA, ICW3_MASTER_CASCADE);
+    outb(PIC_SLAVE_DATA, ICW3_SLAVE_CASCADE);
+    outb(PIC_MASTER_DATA, ICW4_INIT_X86);
+    outb(PIC_SLAVE_DATA, ICW4_INIT_X86);
+    outb(PIC_MASTER_DATA, 0x0); //null out the data registers just in case
+    outb(PIC_SLAVE_DATA, 0x0);
 
 	//processor defined interrupts
     idt_set_gate( 0, (u32int)isr0 , 0x08, 0x8E);
