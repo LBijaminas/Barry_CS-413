@@ -4,6 +4,12 @@
 #define COMMON_H
 // let's define what NULL is
 #define NULL 0
+
+/*
+ * PANIC macro returns error on __LINE__ of __FILE__
+ */
+#define PANIC(a) panic(a, __LINE__, __FILE__) 
+
 // Type defs so I wouldn't need to rewrite multi-word
 // variable types
 typedef unsigned int   u32int;

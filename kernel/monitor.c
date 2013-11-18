@@ -265,4 +265,9 @@ char checkTheBits(u8int hByte){
     }
 }
 
-
+panic(char* msg, u32int line, char* file)
+{
+	monitor_write(msg);
+	monitor_write_dec(line);
+	monitor_write(file);
+}

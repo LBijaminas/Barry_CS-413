@@ -24,7 +24,7 @@ int main(){
     asm volatile("int $0x4");
 
     asm volatile("sti");
-    init_timer(1000);
-
+//    init_timer(1000);
+	PANIC("PANIC IS WORKING HOLY CRAP I'M SCARED!");
     return 0;
 }
