@@ -6,9 +6,6 @@ u32int frame_count;
 
 extern u32int placement_address;
 
-#define INDEX_FROM_BIT(a) (a/(8*4))
-#define OFFSET_FROM_BIT(a) (a%(8*4))
-
 /*
 * Macros are considered outdated so I've implemented them here as functions.
 * Instead of using 8 * 4 I just use the result of that to save an operation.
