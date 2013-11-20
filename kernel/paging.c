@@ -28,7 +28,7 @@ static void set_frame(u32int frame_addr)
         u32int frame = frame_addr/0x1000;
         u32int idx = index_from_bit(frame);
         u32int off = offset_from_bit(frame);
-        frames[idx] |= (0x1 << off);
+        frames[idx] |= (0x1 << off); //how can we index a pointer that has no address yet?
 }
 /*
 * Clear a bit in the frames bitset
