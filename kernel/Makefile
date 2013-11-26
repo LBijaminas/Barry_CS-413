@@ -20,7 +20,7 @@ os-image: asm/boot_sector.bin kernel.bin
 #kernel.bin: kernel_entry.o gdt.o interrupt.o ${OBJ}
 	#ld -melf_i386 -o $@ -Tlink.ld $^ --oformat binary
 
-kernel.bin: kernel_entry.o isr.o descriptor_tables.o gdt.o interrupt.o timer.o common.o monitor.o main.o
+kernel.bin: kernel_entry.o isr.o descriptor_tables.o gdt.o interrupt.o timer.o common.o monitor.o paging.o main.o
 	ld -melf_i386 -o $@ -Tlink.ld -Ttext 0x1000 $^ --oformat binary
 
 %.o: %.c ${HEADERS}
