@@ -8,6 +8,9 @@ u32int frame_count;
 
 extern u32int placement_address;
 
+page_directory_t* kernel_directory;
+page_directory_t* current_directory;
+
 /*
 * Macros are considered outdated so I've implemented them here as functions.
 * Instead of using 8 * 4 I just use the result of that to save an operation.
@@ -120,7 +123,7 @@ void initialize_paging()
 
 	//Create a page directory
 	kernel_directory = (page_directory_t*) kmalloc_a(sizeof(page_directory_t));
-	memset(kernel_directory, 0, sizeof(page_directory_t);
+	memset(kernel_directory, 0, sizeof(page_directory_t));
 	current_directory = kernel_directory;
 	
 	/*
@@ -164,15 +167,14 @@ page_t* get_page(u32int address, int make, page_directory_t* dir)
 		memset(dir->tables[table_idx], 0, 0x1000);
 		dir->tablesPhysical[table_idx] = tmp | 0x7; //PRESENT, RW, US.
 		return &dir->tables[table_idx]->pages[address%1024];
-	else{
+	}else{
 		return 0;
-	}
 	}
 }
 
 void page_fault(registers_t regs)
 {
-	u32int faulting_address
+	u32int faulting_address;
 	asm volatile("mov %%cr2, %0" : "=r" (faulting_address));
 
 	int present = !(regs.err_code & 0x1); //page not present
