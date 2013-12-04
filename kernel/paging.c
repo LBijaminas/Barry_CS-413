@@ -6,7 +6,7 @@
 u32int* frames;
 u32int frame_count;
 
-extern u32int placement_address;
+extern u32int p_address;
 
 page_directory_t* kernel_directory;
 page_directory_t* current_directory;
@@ -122,7 +122,7 @@ void initialize_paging()
 	memset(frames, 0, index_from_bit(frame_count));
 
 	//Create a page directory
-	kernel_directory = (page_directory_t*) kmalloc_a(sizeof(page_directory_t));
+	kernel_directory = (page_directory_t*) kmalloc_aligned(sizeof(page_directory_t));
 	memset(kernel_directory, 0, sizeof(page_directory_t));
 	current_directory = kernel_directory;
 	
@@ -130,12 +130,12 @@ void initialize_paging()
 	 * We need to identity map (phys addr = virt addr) from 0x0 to the end of
 	 * used memory, so we can access this transparently as if paging wasn't
 	 * enabled. NOTE that we use a while loop here deliberately. Inside the
-	 * loop body we actually change placement_address by calling kmalloc(). A
+	 * loop body we actually change p_address by calling kmalloc(). A
 	 * while loop causes this to be computed on-the-fly rather than once at
 	 * the start.
 	 */ 
 	int i = 0;
-	while(i < placement_address){
+	while(i < p_address){
 		//Kernel code is readable but not writeable from userspace.
 		alloc_frame(get_page(i, 1, kernel_directory), 0, 0);
 		i += 0x1000;
@@ -163,7 +163,7 @@ page_t* get_page(u32int address, int make, page_directory_t* dir)
 		return &dir->tables[table_idx]->pages[address%1024];
 	}else if(make){
 		u32int tmp;
-		dir->tables[table_idx] = (page_table_t*)kmalloc_ap(sizeof(page_table_t), &tmp);
+		dir->tables[table_idx] = (page_table_t*)kmalloc_aligned_returned(sizeof(page_table_t), &tmp);
 		memset(dir->tables[table_idx], 0, 0x1000);
 		dir->tablesPhysical[table_idx] = tmp | 0x7; //PRESENT, RW, US.
 		return &dir->tables[table_idx]->pages[address%1024];
